@@ -1,5 +1,4 @@
-from django.contrib import admin
-from django.urls import path,include
+from django.urls import path
 from user_login import views
 
 urlpatterns = [
@@ -7,4 +6,5 @@ urlpatterns = [
     path('login/',views.login,name='user-login'),
     path('interview_home/',views.interviewer_home,name="inter-home"),
     path('user_home/', views.user_home, name="user-home"),
+    path('user_details_register/',views.user_application_form,name='user-details-form'),
 ]

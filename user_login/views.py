@@ -55,3 +55,6 @@ def interviewer_home(request):
 
 def user_home(request):
     return render(request,"user.html")
+
+def user_application_form(request):
+    return render(request, 'user_details_form.html')

@@ -5,11 +5,25 @@
 
 <form method="post">
     {% csrf_token %}
-    <input type="email" name="email" placeholder="Email"><br>
-    <input type="text" name="username" placeholder="Username"><br>
-    <input type="password" name="password" placeholder="password"><br>
-    <input type="password" name="confirm_password" placeholder="password confirmation"><br>
-    <input type="Submit">
+    <div>
+        <span>Username : </span><input type="text" name="username" placeholder="Username"><br>
+    </div>
+    <p></p>
+    <div>
+        <span>Email : </span><input type="email" name="email" placeholder="Email"><br>
+    </div>
+    <p></p>
+    <div>
+        <span>Password : </span><input type="password" name="password" placeholder="Password"><br>
+    </div>
+    <p></p>
+    <div>
+        <span>Confirm Password : </span><input type="password" name="confirm_password" placeholder="password confirmation"><br>
+    </div>
+    <p></p>
+    <div>
+        <input type="Submit">
+    </div>
 </form>
 
 <div>
