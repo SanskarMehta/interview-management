@@ -41,11 +41,23 @@ def login(request):
 
         if user is not None:
             if user.Is_interviewer:
-                print('interviewer')
                 auth.login(request, user)
-                return redirect('inter-home')
+                if user.Is_first_time:
+                    user.Is_first_time = False
+                    user.save()
+                    return redirect('interviewer-details-form')
+                else:
+                    return redirect("inter-home")
             else:
-                return redirect("user-home")
+                auth.login(request, user)
+                if user.Is_first_time:
+                    user.Is_first_time = False
+                    user.save()
+                    return redirect("user-details-form")
+                else:
+                    # user.Is_first_time = True
+                    # user.save()
+                    return redirect("user-home")
         else:
             messages.info(request, 'invalid credentials')
             return render(request, 'login.html')
@@ -63,3 +75,6 @@ def user_home(request):
 
 def user_application_form(request):
     return render(request, 'user_details_form.html')
+
+def interviewer_application_form(request):
+    return render(request,'interviewer_details_form.html')

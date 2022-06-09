@@ -15,6 +15,7 @@ class CustomUserAdmin(UserAdmin):
             {
                 'fields': (
                     'Is_interviewer',
+                    'Is_first_time',
                 )
             }
         )
