@@ -5,19 +5,19 @@
 <form method="post">
     {% csrf_token %}
     <div>
-        <span>Phone Number : </span><input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890">
+        <span>Phone Number : </span><input type="tel" name="mobilenumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890">
     </div>
     <p></p>
     <div>
-        <span>Technology : </span><input type="text" placeholder="Ex. Python">
+        <span>Technology : </span><input type="text" name="technology" placeholder="Ex. Python">
     </div>
     <p></p>
     <div>
-        <span>Job Role : </span><input type="text" placeholder="Ex. Software Developer">
+        <span>Job Role : </span><input type="text" name="job_role" placeholder="Ex. Software Developer">
     </div>
     <p></p>
     <div>
-        <span>Experience : </span><input type="text" placeholder="Ex. 3+yrs">
+        <span>Experience : </span><input type="text" name="experience" placeholder="Ex. 3+yrs">
     </div>
     <p></p>
     <div>
@@ -25,4 +25,9 @@
     </div>
     <p></p>
 </form>
+<div>
+    {% for message in messages %}
+    <h4>{{ message }}</h4>
+    {% endfor %}
+</div>
 {% endblock content %}

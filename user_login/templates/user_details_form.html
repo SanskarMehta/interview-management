@@ -2,30 +2,30 @@
 {% block title %}User-Details{% endblock title %}
 {% block content %}
 <h3>Welcome to User Detail Form</h3>
-<form method="post">
+<form enctype="multipart/form-data" method="post">
     {% csrf_token %}
     <div>
-        <span>Phone Number : </span><input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890">
+        <span>Phone Number : </span><input type="tel" name="mobilenumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890">
     </div>
     <p></p>
     <div>
-        <span>Technology : </span><input type="text" placeholder="Ex. Python">
+        <span>Technology : </span><input type="text" name="technology" placeholder="Ex. Python">
     </div>
     <p></p>
     <div>
-        <span>10th marks : </span><input type="number" step="any" placeholder="Ex. 98">
+        <span>10th marks : </span><input type="number" name="marks_10th" step="any" placeholder="Ex. 98">
     </div>
     <p></p>
     <div>
-        <span>12th marks : </span><input type="number" step="any" placeholder="Ex. 96">
+        <span>12th marks : </span><input type="number" name="marks_12th" step="any" placeholder="Ex. 96">
     </div>
     <p></p>
     <div>
-        <span>CPI (College , Out of 10) : </span><input type="number" step="any" placeholder="Ex 8.97">
+        <span>CPI (College , Out of 10) : </span><input type="number" name="cpi" step="any" placeholder="Ex 8.97">
     </div>
     <p></p>
     <div>
-        <span>Upload your CV : </span><input type="file">
+        <span>Upload your CV : </span><input type="file" name="cvfile">
     </div>
     <p></p>
     <div>
@@ -33,4 +33,10 @@
     </div>
     <p></p>
 </form>
+
+<div>
+    {% for message in messages %}
+    <h4>{{ message }}</h4>
+    {% endfor %}
+</div>
 {% endblock content %}
