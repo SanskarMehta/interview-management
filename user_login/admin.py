@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser , user_details , interviewer_details
+from .models import CustomUser, user_details, interviewer_details, company_details, job_applied
 from .forms import CustomUserCreationForm
 from django.contrib.auth.admin import UserAdmin
 
@@ -21,6 +21,9 @@ class CustomUserAdmin(UserAdmin):
         )
     )
 
-admin.site.register(interviewer_details)
+
 admin.site.register(user_details)
+admin.site.register(interviewer_details)
+admin.site.register(company_details)
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(job_applied)

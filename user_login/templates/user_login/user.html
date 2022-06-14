@@ -1,5 +1,6 @@
-{% extends 'base.html' %}
+{% extends 'user_login/base.html' %}
 {% block title %}User's Page{% endblock title %}
 {% block content %}
 <h3>Welcome to User's page</h3>
+<a href="{% url 'jobs-lists' %}">Apply Job Page</a>
 {% endblock content %}

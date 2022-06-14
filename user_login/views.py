@@ -1,8 +1,16 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import CustomUser , user_details , interviewer_details
+from .models import CustomUser, user_details, interviewer_details, company_details,job_applied
 from django.contrib.auth.models import auth
-from .forms import User_Details , Interviewer_Details
+
+
+
+@login_required
+def jobLists(request):
+    job_lists = company_details.objects.all()
+    return render(request, 'user_login/jobs_list.html', {'job_lists': job_lists})
+
 
 def register(request):
     if request.method == "POST":
@@ -22,12 +30,12 @@ def register(request):
                 user = CustomUser.objects.create_user(username=username, password=password, email=email)
                 user.save()
                 messages.info(request, 'User is created')
+                return redirect('user-login')
         else:
             messages.info(request, "Your password's are not matching so you unable to create account.")
             return redirect('user-register')
-        return redirect('user-login')
     else:
-        return render(request, 'register.html')
+        return render(request, 'user_login/register.html')
 
 
 def login(request):
@@ -50,19 +58,22 @@ def login(request):
                     return redirect("user-home")
         else:
             messages.info(request, 'invalid credentials')
-            return render(request, 'login.html')
+            return render(request, 'user_login/login.html')
     else:
-        return render(request, 'login.html')
+        return render(request, 'user_login/login.html')
 
 
+@login_required
 def interviewer_home(request):
-    return render(request, "interviewer.html")
+    return render(request, "user_login/interviewer.html")
 
 
+@login_required
 def user_home(request):
-    return render(request, "user.html")
+    return render(request, "user_login/user.html")
 
 
+@login_required
 def user_application_form(request):
     if request.method == "POST":
         user_phone = request.POST['mobilenumber']
@@ -82,14 +93,15 @@ def user_application_form(request):
                 return redirect('user-home')
             else:
                 messages.info(request, "Please Upload .PDF or .DOC file")
-                return render(request, 'user_details_form.html')
+                return render(request, 'user_login/user_details_form.html')
         else:
             messages.info(request, "Your result must be less than or equal to 100")
-            return render(request, 'user_details_form.html')
+            return render(request, 'user_login/user_details_form.html')
     else:
-        return render(request, 'user_details_form.html')
+        return render(request, 'user_login/user_details_form.html')
 
 
+@login_required
 def interviewer_application_form(request):
     if request.method == "POST":
         interviewer_phone = request.POST['mobilenumber']
@@ -104,5 +116,22 @@ def interviewer_application_form(request):
         user.save()
         return redirect('inter-home')
     else:
-        return render(request, 'interviewer_details_form.html')
+        return render(request, 'user_login/interviewer_details_form.html')
 
+
+def userJobApply(request, pk):
+    print(request.user.id)
+    a=request.user.id
+    print(a)
+    user1 = user_details.objects.get(user_id=a)
+    company1 = company_details.objects.get(id=pk)
+    print(user1.user.username)
+    print(user1.user_phone)
+    print(company1)
+    job_application = job_applied.objects.create(user=user1, company=company1)
+    job_application.save()
+    return redirect('after-apply')
+
+
+def after_user_applied(request):
+    return render(request,'user_login/after_apply.html')
