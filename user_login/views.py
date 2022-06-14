@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import CustomUser, user_details, interviewer_details, company_details,job_applied
 from django.contrib.auth.models import auth
+from django.contrib.auth import logout
 
 
 
@@ -135,3 +136,8 @@ def userJobApply(request, pk):
 
 def after_user_applied(request):
     return render(request,'user_login/after_apply.html')
+
+
+def logout_func(request):
+    logout(request)
+    return redirect('main-home')

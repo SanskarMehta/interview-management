@@ -13,6 +13,7 @@ urlpatterns = [
     path('job_lists/', views.jobLists, name='jobs-lists'),
     path('job_applied/<int:pk>', views.userJobApply, name='job-apply'),
     path('after_applied/',views.after_user_applied,name='after-apply'),
+    path('logout/',views.logout_func,name='logout-user')
 ]
 
 if settings.DEBUG:
